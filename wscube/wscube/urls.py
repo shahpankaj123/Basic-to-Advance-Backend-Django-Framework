@@ -19,5 +19,10 @@ from wscube import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('about-user/',views.aboutus)
+    path('about-user/',views.aboutus),
+    path('',views.home,name='home'),
+    path('course/',views.course),
+    path('course/<int:courseid>',views.coursedetail),
+    path('savecontact',views.contact,name='contact'),
+
 ]
