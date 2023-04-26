@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from app.models import Register
+from app.models import Product_detail
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
@@ -7,7 +8,9 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='login')
 def home(request):
- return render(request, 'app/home.html')
+ data=Product_detail.objects.all()
+ productdata={'data':data}
+ return render(request, 'app/home.html',productdata)
 
 
 def product_detail(request):
@@ -43,7 +46,7 @@ def mobile(request):
 
 def Login(request): 
   name=""
-  if request.method=='POST':
+  if request.method == 'POST':
    email=request.POST.get('email')
    pass1= request.POST.get('password')
    name=email
@@ -77,4 +80,4 @@ def checkout(request):
 
 def Logout(request):
  logout(request)
- return render(request,'app/login.html')
+ return render(request, 'app/login.html')
